@@ -2,6 +2,7 @@ const ManagerEmp = require('./lib/ManagerClass');
 const EngineerEmp = require('./lib/EngineerClass');
 const InternEmp = require('./lib/InternClass');
 const htmlFile = require('./src/createHTML');
+const fs = require('fs'); 
 const inquirer = require('inquirer');
 
 // questions - team manager
@@ -25,7 +26,14 @@ const questionsOthers = [
 
 // generate HTML
 function writeHTML(insertHTML) { 
-
+    const fileName = 'index.html';
+    const htmlPage = `./dist/${fileName}`;
+    fs.writeFile(htmlPage, htmlFile(insertHTML), (err) => {
+        if (err) {
+            throw err;
+        };
+        console.log('The team profile has been created. Please see the dist folder.');
+    });
 }
 
 // validate
